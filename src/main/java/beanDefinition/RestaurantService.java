@@ -2,7 +2,7 @@ package beanDefinition;
 
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class RestaurantService {
     private FastCook fastCook;
 
