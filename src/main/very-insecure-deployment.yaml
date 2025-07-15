@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: very-insecure-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insecure-app
+  template:
+    metadata:
+      labels:
+        app: insecure-app
+    spec:
+      containers:
+        - name: insecure-app
+          image: nginx:latest # 🟥 уязвимость: используется тег latest
+          ports:
+            - containerPort: 80
+          securityContext:
+            privileged: true             # 🟥 уязвимость: контейнер с привилегиями
+            runAsUser: 0                 # 🟥 уязвимость: запуск от root
+            allowPrivilegeEscalation: true # 🟥 уязвимость: разрешение эскалации привилегий
+          resources: {}                  # 🟥 уязвимость: нет resource limits
+      hostNetwork: true                  # 🟥 уязвимость: контейнер использует hostNetwork
+      hostPID: true                      # 🟥 уязвимость: доступ к host PID namespace
+      hostIPC: true                      # 🟥 уязвимость: доступ к host IPC namespace
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists               # 🟥 уязвимость: позволяет запускаться на master node
