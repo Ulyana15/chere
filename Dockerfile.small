@@ -1,0 +1,6 @@
+FROM alpine:latest
+USER root
+WORKDIR /app
+RUN echo "Hello Checkmarx Security Scan" > hello.txt
+EXPOSE 8080
+CMD ["cat", "hello.txt"]
