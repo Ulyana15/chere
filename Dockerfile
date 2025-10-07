@@ -1,11 +1,16 @@
-FROM eclipse-temurin:17-jre-alpine
+# Используем самый маленький базовый образ
+FROM alpine:latest
+
+# Medium уязвимость: работа от root (оставляем как есть)
+USER root
 
 WORKDIR /app
 
-# Минимальное содержимое
-RUN echo 'public class Test { public static void main(String[] args) { System.out.println("Test"); } }' > Test.java && \
-    javac Test.java
+# Создаем простой файл вместо Java приложения
+RUN echo "Hello Checkmarx Security Scan" > hello.txt
 
+# Medium уязвимость: открываем порт
 EXPOSE 8080
 
-CMD ["java", "Test"]
+# Простая команда
+CMD ["cat", "hello.txt"]
