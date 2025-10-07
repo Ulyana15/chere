@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Test application for security scanning purposes only",
   "dependencies": {
-    "express": "4.17.1",
-    "lodash": "4.17.15",
-    "moment": "2.29.1",
-    "axios": "0.21.1"
+    "express": "4.20.0",
+    "lodash": "4.17.21",
+    "moment": "2.29.4",
+    "axios": "0.30.2"
   }
 }
